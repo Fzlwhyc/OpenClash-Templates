@@ -1,0 +1,88 @@
+; =========================================================
+; Fzlwhyc OpenClash 沉浸式排版与智能调度模板 (Release 1.0 通用开源版)
+; 作者：Fzlwhyc  |  存储位置：GitHub 托管
+; =========================================================
+;
+; 【💡 为什么你需要这个模板？】
+; 许多机场自带的订阅配置，把所有节点粗暴地堆砌在一起，不仅面板混乱，而且毫无逻辑可言。
+; 本模板深度重构了 OpenClash 的节点优选体验，为你解决选择困难症，让合适的节点在合适的时候，自动出现在最顺手的位置。
+;
+; 【🚀 本模板带来的四大核心便利】
+; 
+; 1. 🎯 业务级“智能优先级”排序 (核心亮点)
+;    告别无脑的“全局择优”！本模板根据各大互联网公司的版权与风控逻辑，为你把各组的最优解排在了首位：
+;    - 👽 AI 服务：优先展示 [日/美/台/韩]，剔除[香港]节点，降低封号与风控率。
+;    - 🎬 流媒体：优先展示 [港/台] 节点，确保奈飞/迪士尼解锁率及原生中文字幕。
+;    - 📡 Telegram：优先展示 [新/港] 节点，直连亚洲核心数据中心，图文秒开。
+;    - 📘 下载/GitHub：优先展示 [新/日/韩] 节点，吃满亚太海底光缆极限大带宽。
+;
+; 2. 🎛️ 交互重构与“精准锁定”机制
+;    - 👁️ 视觉降噪：将可点选操作的“手动挡”提前，不可操作的“自动测速挡”沉底，首屏干净清爽。
+;    - 🌍 区域锁定：【国外总模式】作为全局中枢，功能等同于指定国家或地区，择优速而行。
+;    - 📦 冷热分流哲学：摒弃将所有节点塞入一个大下拉框的臃肿做法。将“同地区多节点”和“单节点小众地区”划分为两类。查找清晰，机场核心节点突出，冷门节点不再淹没。
+;    - 🎯 节点精准狙击：弥补了 OpenClash 常规配置的一大痛点，将代理锁定在单一节点上，让 PassWall 吃灰。
+;
+; =========================================================
+
+[custom]
+
+enable_rule_generator=true
+overwrite_original_rules=true
+
+; =========================================================
+; 01. 锁地区模式 (地区内节点自动择优而行)
+; =========================================================
+custom_proxy_group=🌐 国外总模式`select`[]♻️ 全部-自动`[]🌏 亚太-自动`[]🇨🇳 港台-自动`[]🇭🇰 香港-自动`[]🇹🇼 台湾-自动`[]🇯🇵 日本-自动`[]🇸🇬 新加坡-自动`[]🇰🇷 韩国-自动`[]🇺🇸 美国-自动`[]🔥 热门-手动`[]❄️ 冷门-手动`[]DIRECT
+
+; =========================================================
+; 02. 常用功能组 (按体验优先级排列)
+; =========================================================
+custom_proxy_group=👽 AI`select`[]🌐 国外总模式`[]🇯🇵 日本-自动`[]🇺🇸 美国-自动`[]🇹🇼 台湾-自动`[]🇰🇷 韩国-自动`[]🇸🇬 新加坡-自动`[]🔥 热门-手动`[]❄️ 冷门-手动
+
+custom_proxy_group=📘 GitHub`select`[]🌐 国外总模式`[]🇸🇬 新加坡-自动`[]🇯🇵 日本-自动`[]🇰🇷 韩国-自动`[]🇺🇸 美国-自动`[]🔥 热门-手动`[]❄️ 冷门-手动
+
+custom_proxy_group=📡 Telegram`select`[]🌐 国外总模式`[]🇸🇬 新加坡-自动`[]🇭🇰 香港-自动`[]🇹🇼 台湾-自动`[]🇯🇵 日本-自动`[]🇺🇸 美国-自动`[]🇰🇷 韩国-自动`[]🔥 热门-手动`[]❄️ 冷门-手动
+
+custom_proxy_group=🎬 流媒体`select`[]🌐 国外总模式`[]🇨🇳 港台-自动`[]🇹🇼 台湾-自动`[]🇭🇰 香港-自动`[]🇸🇬 新加坡-自动`[]🇯🇵 日本-自动`[]🇰🇷 韩国-自动`[]🇺🇸 美国-自动`[]🔥 热门-手动`[]❄️ 冷门-手动
+
+custom_proxy_group=🌍 国外`select`[]🌐 国外总模式`[]🌏 亚太-自动`[]🇨🇳 港台-自动`[]🇯🇵 日本-自动`[]🇸🇬 新加坡-自动`[]🇰🇷 韩国-自动`[]🇺🇸 美国-自动`[]🔥 热门-手动`[]❄️ 冷门-手动
+
+; =========================================================
+; 03. 手动模式（Passwall 吃灰核心）
+; =========================================================
+custom_proxy_group=🏠 国内`select`[]DIRECT`[]🌐 国外总模式
+
+; 热门手工库：已加入宽容正则匹配不同机场的中英文缩写命名
+custom_proxy_group=🔥 热门-手动`select`(香港|HK|Hong)`(台湾|TW|Tai)`(日本|JP|Japan)`(美国|US|America|United States)`(新加坡|SG|Singapore)`(韩国|KR|Korea)
+
+; 冷门手工库：强制按 羊毛区->独占区->隐私区->亚太->其他 排序
+custom_proxy_group=❄️ 冷门-手动`select`(土耳其|TR|Turkey)`(阿根廷|AR|Argentina)`(尼日利亚|NG|Nigeria)`(埃及|EG|Egypt)`(巴基斯坦|PK|Pakistan)`(乌克兰|UA|Ukraine)`(印度|IN|India)`(巴西|BR|Brazil)`(英国|UK|United Kingdom)`(加拿大|CA|Canada)`(澳大利亚|AU|Australia)`(德国|DE|Germany)`(法国|FR|France)`(荷兰|NL|Netherlands)`(意大利|IT|Italy)`(瑞士|CH|Switzerland)`(冰岛|IS|Iceland)`(罗马尼亚|RO|Romania)`(立陶宛|LT|Lithuania)`(马来西亚|MY|Malaysia)`(泰国|TH|Thailand)`(越南|VN|Vietnam)`(菲律宾|PH|Philippines)`(印度尼西亚|ID|Indonesia)`(新西兰|NZ|New Zealand)`(柬埔寨|KH|Cambodia)`(孟加拉|BD|Bangladesh)`(尼泊尔|NP|Nepal)`(爱尔兰|IE|Ireland)`(波兰|PL|Poland)`(西班牙|ES|Spain)`(芬兰|FI|Finland)`(奥地利|AT|Austria)`(瑞典|SE|Sweden)`(希腊|GR|Greece)`(拉脱维亚|LV|Latvia)`(挪威|NO|Norway)`(丹麦|DK|Denmark)`(比利时|BE|Belgium)`(卢森堡|LU|Luxembourg)`(马其顿|MK|Macedonia)`(亚美尼亚|AM|Armenia)`(阿尔巴尼亚|AL|Albania)`(格鲁吉亚|GE|Georgia)`(葡萄牙|PT|Portugal)`(摩尔多瓦|MD|Moldova)`(爱沙尼亚|EE|Estonia)`(克罗地亚|HR|Croatia)`(斯洛文尼亚|SI|Slovenia)`(斯洛伐克|SK|Slovakia)`(俄罗斯|RU|Russia)`(保加利亚|BG|Bulgaria)`(塞尔维亚|RS|Serbia)`(安哥拉|AO|Angola)`(摩洛哥|MA|Morocco)`(南非|ZA|South Africa)`(沙特阿拉伯|SA|Saudi Arabia)`(伊拉克|IQ|Iraq)`(以色列|IL|Israel)`(塞浦路斯|CY|Cyprus)`(阿曼|OM|Oman)`(阿拉伯联合酋长国|AE|UAE)`(卡塔尔|QA|Qatar)`(乌兹别克斯坦|UZ|Uzbekistan)`(哈萨克斯坦|KZ|Kazakhstan)`(秘鲁|PE|Peru)`(哥伦比亚|CO|Colombia)`(危地马拉|GT|Guatemala)`(厄瓜多尔|EC|Ecuador)`(哥斯达黎加|CR|Costa Rica)`(墨西哥|MX|Mexico)`(智利|CL|Chile)`(玻利维亚|BO|Bolivia)`(乌拉圭|UY|Uruguay)
+
+; =========================================================
+; 04. 自动组 (不可选中，沉底不碍眼)
+; =========================================================
+custom_proxy_group=♻️ 全部-自动`url-test`.*`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🌏 亚太-自动`url-test`(香港|HK|Hong|台湾|TW|Tai|日本|JP|Japan|新加坡|SG|Singapore|韩国|KR|Korea)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇨🇳 港台-自动`url-test`(香港|HK|Hong|台湾|TW|Tai)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇭🇰 香港-自动`url-test`(香港|HK|Hong)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇹🇼 台湾-自动`url-test`(台湾|TW|Tai)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇯🇵 日本-自动`url-test`(日本|JP|Japan)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇸🇬 新加坡-自动`url-test`(新加坡|SG|Singapore)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇰🇷 韩国-自动`url-test`(韩国|KR|Korea)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=🇺🇸 美国-自动`url-test`(美国|US|America|United States)`http://www.gstatic.com/generate_204`300,,50
+
+; =========================================================
+; 05. 兜底组
+; =========================================================
+custom_proxy_group=🐟 漏网之鱼`select`[]🌐 国外总模式`[]🌍 国外`[]DIRECT`[]♻️ 全部-自动
+
+; =========================================================
+; 06. 核心路由规则集 (Rulesets)
+; =========================================================
+ruleset=👽 AI,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+ruleset=📘 GitHub,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GitHub.list
+ruleset=📡 Telegram,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+ruleset=🎬 流媒体,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+ruleset=🌍 国外,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
+ruleset=🏠 国内,[]GEOIP,CN
+ruleset=🐟 漏网之鱼,[]MATCH
