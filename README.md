@@ -1,4 +1,4 @@
-# 🚀 Fzlwhyc OpenClash 超便利节点模板
+# 🚀 OpenClash 超便利节点模板 | by Fzlwhyc
 
 **重构你的网络优选体验 | 专治各种“选择困难症”与“观感乱、手感差”**
 
