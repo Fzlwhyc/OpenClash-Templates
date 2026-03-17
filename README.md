@@ -13,6 +13,7 @@
 * **👽 AI 服务**：优先展示 `[日/美/台/韩]`，底层物理剔除 `[香港]` 节点，大幅降低 ChatGPT/Claude 封号与风控率。
 * **🎬 流媒体**：优先展示 `[港/台]` 节点，确保 Netflix/Disney+ 等最高解锁率及原生中文字幕。
 * **📡 Telegram**：优先展示 `[新/港]` 节点，直连亚洲核心数据中心，图文秒开。
+* **🎵 TikTok**：优先展示 `[台/日/新/美]` 节点，底层精准规避 `[香港]` 锁区黑屏雷达，无缝解锁全球短视频趋势与繁中评论区。
 * **📘 下载/GitHub**：优先展示 `[新/日/韩]` 节点，吃满亚太海底光缆极限大带宽。
 
 ### 2. 🎛️ 交互重构与“精准锁定”机制
@@ -29,7 +30,7 @@
 
 ### 第一步：获取模板直链
 复制以下链接（这是本仓库模板的 Raw 直链）：
-> `https://raw.githubusercontent.com/Fzlwhyc/OpenClash-Templates/main/Fzlwhyc_OpenClash.ini`
+> `https://raw.githubusercontent.com/Fzlwhyc/OpenClash-Templates/main//fzlwhyc-openclash.ini`
 
 ### 第二步：在 OpenClash 中应用
 1. 进入路由器的 OpenClash 后台面板。
